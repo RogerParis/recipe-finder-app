@@ -38,6 +38,10 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "API_URL": "https://www.themealdb.com/api/json/v1/1",
+      "OPENAI_API_KEY": "your_openai_api_key_here"
     }
   }
 }
