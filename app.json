@@ -40,8 +40,16 @@
       "typedRoutes": true
     },
     "extra": {
-      "API_URL": "https://www.themealdb.com/api/json/v1/1",
-      "OPENAI_API_KEY": "your_openai_api_key_here"
+      "API_URL": {
+        "dev": "https://www.themealdb.com/api/json/v1/1",
+        "staging": "https://staging.themealdb.com/api/json/v1/1",
+        "prod": "https://prod.themealdb.com/api/json/v1/1"
+      },
+      "OPENAI_API_KEY": {
+        "dev": "your_dev_openai_api_key",
+        "staging": "your_staging_openai_api_key",
+        "prod": "your_prod_openai_api_key"
+      }
     }
   }
 }
