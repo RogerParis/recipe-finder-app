@@ -46,9 +46,9 @@
         "prod": "https://prod.themealdb.com/api/json/v1/1"
       },
       "OPENAI_API_KEY": {
-        "dev": "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",
-        "staging": "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",
-        "prod": "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"
+        "dev": "",
+        "staging": "",
+        "prod": ""
       }
     }
   }
