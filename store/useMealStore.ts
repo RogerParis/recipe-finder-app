@@ -1,7 +1,6 @@
-import { env } from "@/config/env";
-import axios from "axios";
-import { create } from "zustand";
-
+import { env } from '@/config/env';
+import axios from 'axios';
+import { create } from 'zustand';
 
 interface Meal {
   idMeal: string;
@@ -23,5 +22,5 @@ export const useMealStore = create<MealState>((set) => ({
     } catch (error) {
       console.error('Error fetching meals:', error);
     }
-  }
+  },
 }));

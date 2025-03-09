@@ -25,7 +25,7 @@ export const useAISuggestions = create<AISuggestionState>((set) => ({
         },
         {
           headers: {
-            Authorization: `Bearer ${env.OPENAI_API_KEY}`,
+            Authorization: `Bearer ${env.AI_API_KEY}`,
             'Content-Type': 'application/json',
           },
         },
