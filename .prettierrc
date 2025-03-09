@@ -1,23 +1,15 @@
 {
+  "singleQuote": true,
+  "semi": true,
   "bracketSpacing": true,
   "arrowParens": "always",
   "bracketSameLine": true,
-  "singleQuote": true,
   "trailingComma": "all",
   "printWidth": 100,
   "plugins": ["@ianvs/prettier-plugin-sort-imports"],
-  "importOrder": [
-    "^react",
-    "^react-native",
-    "^expo",
-    "<THIRD_PARTY_MODULES>",
-    "",
-    "^@/components/(.*)$",
-    "^@/utils/(.*)$",
-    "^@/hooks/(.*)$",
-    "",
-    "^[./]"
-  ],
+  "pluginSearchDirs": ["."],
+  "importOrder": ["^react", "^react-native", "^expo", "<THIRD_PARTY_MODULES>", "", "^[./]"],
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseSensitive": false
 }

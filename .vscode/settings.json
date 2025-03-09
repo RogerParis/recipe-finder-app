@@ -1,5 +1,6 @@
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "notebook.defaultFormatter": "esbenp.prettier-vscode"
+  "notebook.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.importOrderSeparation": true
 }
