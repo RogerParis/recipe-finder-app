@@ -24,7 +24,27 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['warn'],
 
     // ✅ Auto-sort imports
-    'simple-import-sort/imports': 'error',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          // React and React Native first
+          ['^react', '^react-native'],
+
+          // Expo packages
+          ['^expo', '^@expo'],
+
+          // Third-party libraries (anything from node_modules)
+          ['<THIRD_PARTY_MODULES>'],
+
+          // Absolute imports from the project (e.g., "@/components", "@/utils")
+          ['^@/components', '^@/hooks', '^@/utils'],
+
+          // Relative imports (starting with ./ or ../)
+          ['^\\./', '^\\.\\./'],
+        ],
+      },
+    ],
     'simple-import-sort/exports': 'error',
 
     // ✅ Auto-remove unused imports
