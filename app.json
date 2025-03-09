@@ -46,9 +46,9 @@
         "prod": "https://prod.themealdb.com/api/json/v1/1"
       },
       "OPENAI_API_KEY": {
-        "dev": "your_dev_openai_api_key",
-        "staging": "your_staging_openai_api_key",
-        "prod": "your_prod_openai_api_key"
+        "dev": "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",
+        "staging": "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",
+        "prod": "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"
       }
     }
   }
