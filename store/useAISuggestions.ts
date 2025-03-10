@@ -14,6 +14,7 @@ export const useAISuggestions = create<AISuggestionState>((set) => ({
   error: null,
   isLoading: true,
   fetchAISuggestion: async () => {
+    set({ isLoading: true });
     try {
       set({ error: null });
       const response = await axios.post(
@@ -23,7 +24,7 @@ export const useAISuggestions = create<AISuggestionState>((set) => ({
           messages: [
             {
               role: 'system',
-              content: 'Suggest a meal name.',
+              content: 'Suggest an ingredient for a meal.',
             },
           ],
           max_tokens: 100,

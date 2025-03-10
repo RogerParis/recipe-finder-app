@@ -53,6 +53,11 @@ const HomeScreen = () => {
     }
   };
 
+  const handleTrySuggestion = () => {
+    setQueryMealSuggestion(mealSuggestion);
+    fetchMeals(mealSuggestion);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.suggestionCard}>
@@ -62,9 +67,18 @@ const HomeScreen = () => {
         ) : (
           <Text style={styles.suggestion}>{mealSuggestion}</Text>
         )}
-        <TouchableOpacity style={styles.button} onPress={handleFetchAISuggestion}>
-          <Text style={styles.buttonText}>Get Another Suggestion</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonFlex]}
+            onPress={handleFetchAISuggestion}>
+            <Text style={styles.buttonText}>Get Another</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonFlex, styles.tryButton]}
+            onPress={handleTrySuggestion}>
+            <Text style={styles.buttonText}>Try This</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <Animated.View
@@ -235,6 +249,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#424242',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 8,
+  },
+  buttonFlex: {
+    flex: 1,
+  },
+  tryButton: {
+    backgroundColor: '#2e7d32',
   },
 });
 
