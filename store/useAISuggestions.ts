@@ -5,10 +5,14 @@ import { create } from 'zustand';
 interface AISuggestionState {
   mealSuggestion: string;
   fetchAISuggestion: () => Promise<void>;
+  isLoading: boolean;
+  error: Error | null;
 }
 
 export const useAISuggestions = create<AISuggestionState>((set) => ({
   mealSuggestion: '',
+  isLoading: true,
+  error: null,
   fetchAISuggestion: async () => {
     try {
       const response = await axios.post(
@@ -33,6 +37,9 @@ export const useAISuggestions = create<AISuggestionState>((set) => ({
       set({ mealSuggestion: response.data.choices[0].message.content });
     } catch (error) {
       console.error('Error fetching AI suggestion:', error);
+      set({ error: error as Error });
+    } finally {
+      set({ isLoading: false });
     }
   },
 }));
