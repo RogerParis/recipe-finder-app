@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
+  Animated,
   FlatList,
   Image,
   StyleSheet,
@@ -18,12 +19,39 @@ import { useMealStore } from '@/store/useMealStore';
 const HomeScreen = () => {
   const router = useRouter();
   const [queryMealSuggestion, setQueryMealSuggestion] = useState('');
+  const [errorOpacity] = useState(new Animated.Value(0));
   const { meals, fetchMeals } = useMealStore();
-  const { mealSuggestion, fetchAISuggestion, isLoading } = useAISuggestions();
+  const { mealSuggestion, fetchAISuggestion, isLoading, error } = useAISuggestions();
+
+  useEffect(() => {
+    if (error) {
+      Animated.sequence([
+        Animated.timing(errorOpacity, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.delay(3000),
+        Animated.timing(errorOpacity, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [error]);
 
   useEffect(() => {
     fetchAISuggestion();
   }, []);
+
+  const handleFetchAISuggestion = async () => {
+    try {
+      await fetchAISuggestion();
+    } catch (err) {
+      // Error is handled by the store
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -34,10 +62,30 @@ const HomeScreen = () => {
         ) : (
           <Text style={styles.suggestion}>{mealSuggestion}</Text>
         )}
-        <TouchableOpacity style={styles.button} onPress={fetchAISuggestion}>
+        <TouchableOpacity style={styles.button} onPress={handleFetchAISuggestion}>
           <Text style={styles.buttonText}>Get Another Suggestion</Text>
         </TouchableOpacity>
       </View>
+
+      <Animated.View
+        style={[
+          styles.errorContainer,
+          {
+            opacity: errorOpacity,
+            transform: [
+              {
+                translateY: errorOpacity.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [-20, 0],
+                }),
+              },
+            ],
+          },
+        ]}>
+        <Text style={styles.errorText}>
+          {error || 'Failed to fetch suggestion. Please try again.'}
+        </Text>
+      </Animated.View>
 
       <View style={styles.searchSection}>
         <TextInput
@@ -119,6 +167,27 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
+  },
+  errorContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 16,
+    right: 16,
+    backgroundColor: '#ffebee',
+    padding: 12,
+    borderRadius: 8,
+    marginTop: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  errorText: {
+    color: '#c62828',
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: '500',
   },
   searchSection: {
     flexDirection: 'row',

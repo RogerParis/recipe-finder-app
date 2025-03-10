@@ -4,15 +4,18 @@ import { create } from 'zustand';
 
 interface AISuggestionState {
   mealSuggestion: string;
-  fetchAISuggestion: () => Promise<void>;
+  error: string | null;
   isLoading: boolean;
+  fetchAISuggestion: () => Promise<void>;
 }
 
 export const useAISuggestions = create<AISuggestionState>((set) => ({
   mealSuggestion: '',
+  error: null,
   isLoading: true,
   fetchAISuggestion: async () => {
     try {
+      set({ error: null });
       const response = await axios.post(
         'https://openrouter.ai/api/v1/chat/completions',
         {
@@ -34,6 +37,7 @@ export const useAISuggestions = create<AISuggestionState>((set) => ({
       );
       set({ mealSuggestion: response.data.choices[0].message.content });
     } catch (error) {
+      set({ error: 'Failed to fetch AI suggestion' });
       console.error('Error fetching AI suggestion:', error);
     } finally {
       set({ isLoading: false });
