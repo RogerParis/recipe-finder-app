@@ -40,15 +40,11 @@
       "typedRoutes": true
     },
     "extra": {
-      "API_URL": {
-        "dev": "https://www.themealdb.com/api/json/v1/1",
-        "staging": "https://staging.themealdb.com/api/json/v1/1",
-        "prod": "https://prod.themealdb.com/api/json/v1/1"
+      "router": {
+        "origin": false
       },
-      "AI_API_KEY": {
-        "dev": "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",
-        "staging": "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",
-        "prod": "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"
+      "eas": {
+        "projectId": "17fba524-5c63-4380-bba3-8137a64a1f7b"
       }
     }
   }
