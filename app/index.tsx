@@ -4,6 +4,7 @@ import {
   Animated,
   FlatList,
   Image,
+  Keyboard,
   StyleSheet,
   Text,
   TextInput,
@@ -12,6 +13,7 @@ import {
 } from 'react-native';
 
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 import { useAISuggestions } from '@/store/useAISuggestions';
 import { useMealStore } from '@/store/useMealStore';
@@ -58,6 +60,15 @@ const HomeScreen = () => {
     fetchMeals(mealSuggestion);
   };
 
+  const handleClearSearch = () => {
+    setQueryMealSuggestion('');
+  };
+
+  const handleSearch = () => {
+    Keyboard.dismiss();
+    fetchMeals(queryMealSuggestion);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.suggestionCard}>
@@ -102,16 +113,21 @@ const HomeScreen = () => {
       </Animated.View>
 
       <View style={styles.searchSection}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search for a meal..."
-          value={queryMealSuggestion}
-          onChangeText={setQueryMealSuggestion}
-          placeholderTextColor="#666"
-        />
-        <TouchableOpacity
-          style={styles.searchButton}
-          onPress={() => fetchMeals(queryMealSuggestion)}>
+        <View style={styles.searchInputContainer}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search for a meal..."
+            value={queryMealSuggestion}
+            onChangeText={setQueryMealSuggestion}
+            placeholderTextColor="#666"
+          />
+          {queryMealSuggestion.length > 0 && (
+            <TouchableOpacity style={styles.clearButton} onPress={handleClearSearch}>
+              <Ionicons name="close-circle" size={20} color="#666" />
+            </TouchableOpacity>
+          )}
+        </View>
+        <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
           <Text style={styles.buttonText}>Search</Text>
         </TouchableOpacity>
       </View>
@@ -208,14 +224,20 @@ const styles = StyleSheet.create({
     padding: 16,
     gap: 8,
   },
-  searchInput: {
+  searchInputContainer: {
     flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#fff',
-    padding: 12,
     borderRadius: 8,
-    fontSize: 16,
     borderWidth: 1,
     borderColor: '#e0e0e0',
+  },
+  searchInput: {
+    flex: 1,
+    padding: 12,
+    fontSize: 16,
+    backgroundColor: 'transparent',
   },
   searchButton: {
     backgroundColor: '#1a237e',
@@ -260,6 +282,10 @@ const styles = StyleSheet.create({
   },
   tryButton: {
     backgroundColor: '#2e7d32',
+  },
+  clearButton: {
+    padding: 8,
+    marginRight: 4,
   },
 });
 
