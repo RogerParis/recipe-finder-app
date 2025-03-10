@@ -19,7 +19,7 @@ const HomeScreen = () => {
   const router = useRouter();
   const [queryMealSuggestion, setQueryMealSuggestion] = useState('');
   const { meals, fetchMeals } = useMealStore();
-  const { mealSuggestion, fetchAISuggestion, isLoading, error } = useAISuggestions();
+  const { mealSuggestion, fetchAISuggestion, isLoading } = useAISuggestions();
 
   useEffect(() => {
     fetchAISuggestion();
