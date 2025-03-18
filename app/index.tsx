@@ -22,7 +22,7 @@ const HomeScreen = () => {
   const router = useRouter();
   const [queryMealSuggestion, setQueryMealSuggestion] = useState('');
   const [errorOpacity] = useState(new Animated.Value(0));
-  const { meals, fetchMeals } = useMealStore();
+  const { meals, fetchMeals, clearMeals } = useMealStore();
   const { mealSuggestion, fetchAISuggestion, isLoading, error } = useAISuggestions();
 
   useEffect(() => {
@@ -62,6 +62,7 @@ const HomeScreen = () => {
 
   const handleClearSearch = () => {
     setQueryMealSuggestion('');
+    clearMeals();
   };
 
   const handleSearch = () => {
