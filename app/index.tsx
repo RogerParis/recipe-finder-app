@@ -51,7 +51,7 @@ const HomeScreen = () => {
     try {
       await fetchAISuggestion();
     } catch (err) {
-      // Error is handled by the store
+      console.error('Error fetching AI suggestion:', err);
     }
   }, [fetchAISuggestion]);
 
