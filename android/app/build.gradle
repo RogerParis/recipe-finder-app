@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymous.RecipeFinder'
+    namespace 'com.rogerparis.RecipeFinder'
     defaultConfig {
-        applicationId 'com.anonymous.RecipeFinder'
+        applicationId 'com.rogerparis.RecipeFinder'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -28,7 +28,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>myapp</string>
-          <string>com.anonymous.RecipeFinder</string>
+          <string>com.rogerparis.RecipeFinder</string>
         </array>
       </dict>
     </array>

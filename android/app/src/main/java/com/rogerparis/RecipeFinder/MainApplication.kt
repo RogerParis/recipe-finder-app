@@ -1,4 +1,4 @@
-package com.anonymous.RecipeFinder
+package com.rogerparis.RecipeFinder
 
 import android.app.Application
 import android.content.res.Configuration

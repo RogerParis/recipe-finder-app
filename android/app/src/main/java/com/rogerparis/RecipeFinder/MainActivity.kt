@@ -1,4 +1,4 @@
-package com.anonymous.RecipeFinder
+package com.rogerparis.RecipeFinder
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
