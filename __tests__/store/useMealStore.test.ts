@@ -43,6 +43,28 @@ describe('useMealStore', () => {
     expect(result.current.error).toBeNull();
   });
 
+  it('should return empty array if no meals are found', async () => {
+    mockedAxios.get.mockResolvedValueOnce({
+      data: {
+        meals: null,
+      },
+    });
+
+    const { result, waitForNextUpdate } = renderHook(() => useMealStore());
+
+    act(() => {
+      result.current.fetchMeals('pizza');
+    });
+
+    // Wait for async updates
+    await waitForNextUpdate();
+
+    expect(mockedAxios.get).toHaveBeenCalledWith(expect.stringContaining('/search.php?s=pizza'));
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.meals).toEqual([]);
+    expect(result.current.error).toBeNull();
+  });
+
   it('should handle fetchMeals failure', async () => {
     mockedAxios.get.mockRejectedValueOnce(new Error('API Error'));
 
