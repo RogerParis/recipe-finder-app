@@ -33,6 +33,7 @@ export const useMealStore = create<MealState>()(
           state.meals = response.data.meals || [];
         });
       } catch (error) {
+        console.error('Error fetching meals:', error);
         set((state) => {
           state.error = 'Failed to fetch meals.';
         });
