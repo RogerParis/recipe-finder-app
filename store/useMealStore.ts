@@ -3,13 +3,13 @@ import axios from 'axios';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
-interface Meal {
+export interface Meal {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
 }
 
-interface MealState {
+export interface MealState {
   meals: Meal[];
   fetchMeals: (query: string) => Promise<void>;
   clearMeals: () => void;

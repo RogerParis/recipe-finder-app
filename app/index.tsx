@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Animated,
@@ -16,12 +16,12 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useAISuggestions } from '@/store/useAISuggestions';
-import { useMealStore } from '@/store/useMealStore';
+import { Meal, useMealStore } from '@/store/useMealStore';
 
 const HomeScreen = () => {
   const router = useRouter();
   const [queryMealSuggestion, setQueryMealSuggestion] = useState('');
-  const [errorOpacity] = useState(new Animated.Value(0));
+  const errorOpacity = useRef(new Animated.Value(0)).current;
   const { meals, fetchMeals, clearMeals } = useMealStore();
   const { mealSuggestion, fetchAISuggestion, isLoading, error } = useAISuggestions();
 
@@ -47,28 +47,42 @@ const HomeScreen = () => {
     fetchAISuggestion();
   }, []);
 
-  const handleFetchAISuggestion = async () => {
+  const handleFetchAISuggestion = useCallback(async () => {
     try {
       await fetchAISuggestion();
     } catch (err) {
       // Error is handled by the store
     }
-  };
+  }, [fetchAISuggestion]);
 
-  const handleTrySuggestion = () => {
+  const handleTrySuggestion = useCallback(() => {
     setQueryMealSuggestion(mealSuggestion);
     fetchMeals(mealSuggestion);
-  };
+  }, [mealSuggestion, fetchMeals]);
 
-  const handleClearSearch = () => {
+  const handleClearSearch = useCallback(() => {
     setQueryMealSuggestion('');
     clearMeals();
-  };
+  }, [clearMeals]);
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     Keyboard.dismiss();
     fetchMeals(queryMealSuggestion);
-  };
+  }, [queryMealSuggestion, fetchMeals]);
+
+  const renderMealItem = useCallback(
+    ({ item }: { item: Meal }) => (
+      <TouchableOpacity style={styles.mealCard} onPress={() => router.push(`/meal/${item.idMeal}`)}>
+        <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
+        <View style={styles.mealTitleContainer}>
+          <Text style={styles.mealTitle} numberOfLines={2}>
+            {item.strMeal}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    ),
+    [router],
+  );
 
   return (
     <View style={styles.container}>
@@ -136,24 +150,13 @@ const HomeScreen = () => {
       <FlatList
         data={meals}
         keyExtractor={(item) => item.idMeal}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.mealCard}
-            onPress={() => router.push(`/meal/${item.idMeal}`)}>
-            <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
-            <View style={styles.mealTitleContainer}>
-              <Text style={styles.mealTitle} numberOfLines={2}>
-                {item.strMeal}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
+        renderItem={renderMealItem}
         contentContainerStyle={styles.listContent}
         initialNumToRender={6}
         maxToRenderPerBatch={10}
         windowSize={5}
         removeClippedSubviews={true}
-        getItemLayout={(data, index) => ({
+        getItemLayout={(_data, index) => ({
           length: 232,
           offset: 232 * index,
           index,
