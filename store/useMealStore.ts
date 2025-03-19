@@ -11,6 +11,8 @@ export interface Meal {
 
 export interface MealState {
   meals: Meal[];
+  isLoading: boolean;
+  error: string | null;
   fetchMeals: (query: string) => Promise<void>;
   clearMeals: () => void;
 }
@@ -18,19 +20,32 @@ export interface MealState {
 export const useMealStore = create<MealState>()(
   immer((set) => ({
     meals: [],
+    isLoading: false,
+    error: null,
     fetchMeals: async (query) => {
+      set((state) => {
+        state.isLoading = true;
+        state.error = null;
+      });
       try {
         const response = await axios.get(`${env.API_URL}/search.php?s=${query}`);
         set((state) => {
           state.meals = response.data.meals || [];
         });
       } catch (error) {
-        console.error('Error fetching meals:', error);
+        set((state) => {
+          state.error = 'Failed to fetch meals.';
+        });
+      } finally {
+        set((state) => {
+          state.isLoading = false;
+        });
       }
     },
     clearMeals: () => {
       set((state) => {
         state.meals = [];
+        state.error = null;
       });
     },
   })),
