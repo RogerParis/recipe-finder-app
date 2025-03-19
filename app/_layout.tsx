@@ -1,6 +1,15 @@
 import { Stack } from 'expo-router';
 
-export default function RootLayout() {
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn: 'https://9c5dd1002679e15487595a57c4df6837@o4509005539901442.ingest.de.sentry.io/4509005540360272',
+
+  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
+  // spotlight: __DEV__,
+});
+
+export default Sentry.wrap(function RootLayout() {
   return (
     <Stack>
       <Stack.Screen
@@ -31,4 +40,4 @@ export default function RootLayout() {
       />
     </Stack>
   );
-}
+});
