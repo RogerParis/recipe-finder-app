@@ -12,7 +12,12 @@
     "lint": "expo lint"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "collectCoverageFrom": [
+      "app/**/*.{ts,tsx}",
+      "store/**/*.{ts,tsx}",
+      "!**/node_modules/**"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
