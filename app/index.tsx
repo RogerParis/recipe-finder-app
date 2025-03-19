@@ -149,6 +149,15 @@ const HomeScreen = () => {
           </TouchableOpacity>
         )}
         contentContainerStyle={styles.listContent}
+        initialNumToRender={6}
+        maxToRenderPerBatch={10}
+        windowSize={5}
+        removeClippedSubviews={true}
+        getItemLayout={(data, index) => ({
+          length: 232,
+          offset: 232 * index,
+          index,
+        })}
       />
     </View>
   );
