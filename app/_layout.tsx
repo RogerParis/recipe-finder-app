@@ -1,5 +1,7 @@
 import { Stack } from 'expo-router';
 
+import { apolloClient } from '@/services/apollo.service';
+import { ApolloProvider } from '@apollo/client';
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
@@ -11,33 +13,48 @@ Sentry.init({
 
 export default Sentry.wrap(function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen
-        name="index"
-        options={{
-          title: 'Meal of the Day',
-          headerStyle: {
-            backgroundColor: '#1a237e',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      />
-      <Stack.Screen
-        name="meal/[id]"
-        options={{
-          title: 'Meal Details',
-          headerStyle: {
-            backgroundColor: '#1a237e',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      />
-    </Stack>
+    <ApolloProvider client={apolloClient}>
+      <Stack>
+        <Stack.Screen
+          name="index"
+          options={{
+            title: 'Meal of the Day',
+            headerStyle: {
+              backgroundColor: '#1a237e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="meal/[id]"
+          options={{
+            title: 'Meal Details',
+            headerStyle: {
+              backgroundColor: '#1a237e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="countries"
+          options={{
+            title: 'Select a Country',
+            headerStyle: {
+              backgroundColor: '#1a237e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+      </Stack>
+    </ApolloProvider>
   );
 });

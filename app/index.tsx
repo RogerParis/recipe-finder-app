@@ -86,6 +86,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.countryButton} onPress={() => router.push('/countries')}>
+        <Text style={styles.countryButtonText}>Select a Country</Text>
+      </TouchableOpacity>
       <View style={styles.suggestionCard}>
         <Text style={styles.suggestionTitle}>AI Suggestion</Text>
         {isLoading ? (
@@ -300,6 +303,14 @@ const styles = StyleSheet.create({
     padding: 8,
     marginRight: 4,
   },
+  countryButton: {
+    backgroundColor: '#1a237e',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    margin: 16,
+  },
+  countryButtonText: { color: '#fff', fontSize: 16 },
 });
 
 export default HomeScreen;
