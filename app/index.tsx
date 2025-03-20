@@ -309,6 +309,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     margin: 16,
+    zIndex: 1,
   },
   countryButtonText: { color: '#fff', fontSize: 16 },
 });
