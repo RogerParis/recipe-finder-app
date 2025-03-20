@@ -16,6 +16,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useAISuggestions } from '@/store/useAISuggestions';
+import { useCountryStore } from '@/store/useCountryStore';
 import { Meal, useMealStore } from '@/store/useMealStore';
 
 const HomeScreen = () => {
@@ -24,6 +25,7 @@ const HomeScreen = () => {
   const errorOpacity = useRef(new Animated.Value(0)).current;
   const { meals, fetchMeals, clearMeals } = useMealStore();
   const { mealSuggestion, fetchAISuggestion, isLoading, error } = useAISuggestions();
+  const { selectedCountry, clearSelectedCountry } = useCountryStore();
 
   useEffect(() => {
     if (error) {
@@ -89,6 +91,16 @@ const HomeScreen = () => {
       <TouchableOpacity style={styles.countryButton} onPress={() => router.push('/countries')}>
         <Text style={styles.countryButtonText}>Select a Country</Text>
       </TouchableOpacity>
+      {selectedCountry && (
+        <View style={styles.selectedCountryContainer}>
+          <Text style={styles.selectedCountryText}>
+            Selected Country: {selectedCountry.code} {selectedCountry.name} {selectedCountry.emoji}
+          </Text>
+          <TouchableOpacity onPress={clearSelectedCountry}>
+            <Ionicons name="close-circle" size={20} color="#666" />
+          </TouchableOpacity>
+        </View>
+      )}
       <View style={styles.suggestionCard}>
         <Text style={styles.suggestionTitle}>AI Suggestion</Text>
         {isLoading ? (
@@ -312,6 +324,17 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   countryButtonText: { color: '#fff', fontSize: 16 },
+  selectedCountryContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    marginBottom: 8,
+  },
+  selectedCountryText: {
+    fontSize: 16,
+    color: '#424242',
+    marginRight: 8,
+  },
 });
 
 export default HomeScreen;
