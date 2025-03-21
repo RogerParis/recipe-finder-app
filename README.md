@@ -7,9 +7,12 @@
 ## Stack
 
 - React Native (Expo)
-- Zustand
+- Navigation (expo-router)
+- State Management (Zustand + Immer)
 - TypeScript
 - EAS Build
 - GitHub Actions
+- GraphQL (@apollo/client)
+- Testing (Jest, @testing-library/react-hooks)
 
 ## Structure
