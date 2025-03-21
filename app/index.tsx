@@ -3,7 +3,6 @@ import {
   ActivityIndicator,
   Animated,
   FlatList,
-  Image,
   Keyboard,
   StyleSheet,
   Text,
@@ -11,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -75,7 +75,11 @@ const HomeScreen = () => {
   const renderMealItem = useCallback(
     ({ item }: { item: Meal }) => (
       <TouchableOpacity style={styles.mealCard} onPress={() => router.push(`/meal/${item.idMeal}`)}>
-        <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
+        <FastImage
+          source={{ uri: item.strMealThumb }}
+          style={styles.mealImage}
+          resizeMode={FastImage.resizeMode.cover}
+        />
         <View style={styles.mealTitleContainer}>
           <Text style={styles.mealTitle} numberOfLines={2}>
             {item.strMeal}
