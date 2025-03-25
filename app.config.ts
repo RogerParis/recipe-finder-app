@@ -74,6 +74,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         organization: 'no-company-2g',
       },
     ],
+    [
+      '@react-native-google-signin/google-signin',
+      {
+        iosUrlScheme: 'com.googleusercontent.apps.444031261308-dhsm3etbtgsthos1ag1dfqrvr8dms82j',
+      },
+    ],
   ],
   experiments: {
     typedRoutes: true,
