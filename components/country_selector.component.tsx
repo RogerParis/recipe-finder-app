@@ -20,7 +20,7 @@ const CountrySelector = () => {
           <Text style={styles.selectedCountryText}>
             Selected Country: {selectedCountry.code} {selectedCountry.name} {selectedCountry.emoji}
           </Text>
-          <TouchableOpacity onPress={clearSelectedCountry}>
+          <TouchableOpacity onPress={clearSelectedCountry} testID="clear-country-button">
             <Ionicons name="close-circle" size={20} color="#666" />
           </TouchableOpacity>
         </View>

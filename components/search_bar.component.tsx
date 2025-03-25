@@ -21,7 +21,7 @@ const SearchBar: React.FC<Props> = ({ value, onChange, onClear, onSearch }) => (
         placeholderTextColor="#666"
       />
       {value.length > 0 && (
-        <TouchableOpacity style={styles.clearButton} onPress={onClear}>
+        <TouchableOpacity style={styles.clearButton} onPress={onClear} testID="clear-search">
           <Ionicons name="close-circle" size={20} color="#666" />
         </TouchableOpacity>
       )}
