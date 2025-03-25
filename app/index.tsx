@@ -7,6 +7,10 @@ export default function MainMenu() {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push('/auth/login')}>
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity style={styles.button} onPress={() => router.push('/meal')}>
         <Text style={styles.buttonText}>Recipe Finder</Text>
       </TouchableOpacity>

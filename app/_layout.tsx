@@ -1,7 +1,10 @@
+import React, { useEffect } from 'react';
+
 import { Stack } from 'expo-router';
 
 import { apolloClient } from '@/services/apollo.service';
 import { ApolloProvider } from '@apollo/client';
+import { getApp, getApps, initializeApp } from '@react-native-firebase/app';
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
@@ -12,6 +15,12 @@ Sentry.init({
 });
 
 export default Sentry.wrap(function RootLayout() {
+  useEffect(() => {
+    if (!getApps().length) {
+      initializeApp(getApp().options);
+    }
+  }, []);
+
   return (
     <ApolloProvider client={apolloClient}>
       <Stack>
@@ -58,6 +67,20 @@ export default Sentry.wrap(function RootLayout() {
           name="countries"
           options={{
             title: 'Select a Country',
+            headerStyle: {
+              backgroundColor: '#1a237e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+
+        <Stack.Screen
+          name="auth/login"
+          options={{
+            title: 'Login',
             headerStyle: {
               backgroundColor: '#1a237e',
             },
