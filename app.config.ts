@@ -39,6 +39,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   newArchEnabled: true,
   ios: {
     supportsTablet: true,
+    googleServicesFile: './GoogleService-Info.plist',
     bundleIdentifier: getUniqueIdentifier(),
   },
   android: {
@@ -46,6 +47,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       foregroundImage: './assets/images/adaptive-icon.png',
       backgroundColor: '#ffffff',
     },
+    googleServicesFile: './google-services.json',
     package: getUniqueIdentifier(),
   },
   web: {
