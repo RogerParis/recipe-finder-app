@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import FastImage from 'react-native-fast-image';
 
+import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 
 import { env } from '@/config/env';
@@ -38,11 +38,7 @@ const MealDetailScreen = () => {
 
   return (
     <View style={styles.container}>
-      <FastImage
-        source={{ uri: meal?.strMealThumb }}
-        style={styles.image}
-        resizeMode={FastImage.resizeMode.cover}
-      />
+      <Image source={{ uri: meal?.strMealThumb }} style={styles.image} contentFit="cover" />
       <Text style={styles.title}>{meal?.strMeal}</Text>
       <Text style={styles.instructions}>{meal?.strInstructions}</Text>
     </View>

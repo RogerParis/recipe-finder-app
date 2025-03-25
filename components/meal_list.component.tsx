@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import FastImage from 'react-native-fast-image';
 
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 
 import { Meal } from '@/store/useMealStore';
@@ -27,11 +27,7 @@ const MealList: React.FC<Props> = ({ meals }) => {
         <TouchableOpacity
           style={styles.mealCard}
           onPress={() => router.push(`/meal/${item.idMeal}`)}>
-          <FastImage
-            source={{ uri: item.strMealThumb }}
-            style={styles.mealImage}
-            resizeMode={FastImage.resizeMode.cover}
-          />
+          <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} contentFit="cover" />
           <View style={styles.mealTitleContainer}>
             <Text style={styles.mealTitle} numberOfLines={2}>
               {item.strMeal}
