@@ -18,6 +18,19 @@ export default Sentry.wrap(function RootLayout() {
         <Stack.Screen
           name="index"
           options={{
+            title: 'Choose a Feature',
+            headerStyle: {
+              backgroundColor: '#1a237e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="meal/index"
+          options={{
             title: 'Meal of the Day',
             headerStyle: {
               backgroundColor: '#1a237e',

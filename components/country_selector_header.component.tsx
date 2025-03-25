@@ -1,20 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useCountryStore } from '@/store/useCountryStore';
 
-const CountrySelector = () => {
+const CountrySelectorHeader = () => {
   const { selectedCountry, clearSelectedCountry } = useCountryStore();
-  const router = useRouter();
 
   return (
     <View>
-      <TouchableOpacity style={styles.countryButton} onPress={() => router.push('/countries')}>
-        <Text style={styles.countryButtonText}>Select a Country</Text>
-      </TouchableOpacity>
       {selectedCountry && (
         <View style={styles.selectedCountryContainer}>
           <Text style={styles.selectedCountryText}>
@@ -52,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.memo(CountrySelector);
+export default React.memo(CountrySelectorHeader);
