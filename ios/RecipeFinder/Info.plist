@@ -31,6 +31,18 @@
           <string>com.rogerparis.RecipeFinder</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.444031261308-dhsm3etbtgsthos1ag1dfqrvr8dms82j</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>exp+recipefinder</string>
+        </array>
+      </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>

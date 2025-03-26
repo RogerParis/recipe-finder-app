@@ -40,6 +40,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: getUniqueIdentifier(),
+    googleServicesFile: './GoogleService-Info.plist',
   },
   android: {
     adaptiveIcon: {
@@ -47,6 +48,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       backgroundColor: '#ffffff',
     },
     package: getUniqueIdentifier(),
+    googleServicesFile: './google-services.json',
   },
   web: {
     bundler: 'metro',
@@ -72,6 +74,16 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         organization: 'no-company-2g',
       },
     ],
+    [
+      'expo-build-properties',
+      {
+        ios: {
+          useFrameworks: 'static',
+        },
+      },
+    ],
+    '@react-native-firebase/app',
+    '@react-native-firebase/auth',
   ],
   experiments: {
     typedRoutes: true,

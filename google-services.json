@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "444031261308",
+    "project_id": "recipefinder-d51e2",
+    "storage_bucket": "recipefinder-d51e2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444031261308:android:33859bb04b0e619104c7f9",
+        "android_client_info": {
+          "package_name": "com.rogerparis.RecipeFinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444031261308-t5ob3730b9imnlo8muuokoihlgu6v437.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJoKAiidkYndDWOirITqLwWXRto02g-kU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444031261308-t5ob3730b9imnlo8muuokoihlgu6v437.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "444031261308-dhsm3etbtgsthos1ag1dfqrvr8dms82j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rogerparis.RecipeFinder"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444031261308:android:d5d19371d8a024ed04c7f9",
+        "android_client_info": {
+          "package_name": "com.rogerparis.RecipeFinder.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444031261308-ts5lompvgqcj96uo7q1s3r94p3un218t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rogerparis.RecipeFinder.dev",
+            "certificate_hash": "a0b05788c935feebbda4257561c6527d7dff627a"
+          }
+        },
+        {
+          "client_id": "444031261308-t5ob3730b9imnlo8muuokoihlgu6v437.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJoKAiidkYndDWOirITqLwWXRto02g-kU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444031261308-t5ob3730b9imnlo8muuokoihlgu6v437.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "444031261308-dhsm3etbtgsthos1ag1dfqrvr8dms82j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rogerparis.RecipeFinder"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
