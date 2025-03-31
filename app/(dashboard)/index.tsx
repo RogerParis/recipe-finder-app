@@ -2,6 +2,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { useRouter } from 'expo-router';
 
+import { COLORS } from '@/theme/colors';
+
 export default function MainMenu() {
   const router = useRouter();
 
@@ -21,12 +23,12 @@ export default function MainMenu() {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
   button: {
-    backgroundColor: '#1a237e',
+    backgroundColor: COLORS.primary,
     padding: 16,
     borderRadius: 12,
     marginBottom: 20,
     width: '100%',
     alignItems: 'center',
   },
-  buttonText: { color: '#fff', fontSize: 18 },
+  buttonText: { color: COLORS.white, fontSize: 18 },
 });

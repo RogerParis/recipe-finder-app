@@ -3,6 +3,8 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 
 import { Ionicons } from '@expo/vector-icons';
 
+import { COLORS } from '@/theme/colors';
+
 interface Props {
   value: string;
   onChange: (val: string) => void;
@@ -18,11 +20,11 @@ const SearchBar: React.FC<Props> = ({ value, onChange, onClear, onSearch }) => (
         placeholder="Search for a meal..."
         value={value}
         onChangeText={onChange}
-        placeholderTextColor="#666"
+        placeholderTextColor={COLORS.text}
       />
       {value.length > 0 && (
         <TouchableOpacity style={styles.clearButton} onPress={onClear} testID="clear-search">
-          <Ionicons name="close-circle" size={20} color="#666" />
+          <Ionicons name="close-circle" size={20} color={COLORS.text} />
         </TouchableOpacity>
       )}
     </View>
@@ -38,20 +40,20 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#e0e0e0',
+    borderColor: COLORS.border,
   },
   searchInput: { flex: 1, padding: 12, fontSize: 16 },
   searchButton: {
-    backgroundColor: '#1a237e',
+    backgroundColor: COLORS.primary,
     padding: 12,
     borderRadius: 8,
     justifyContent: 'center',
     minWidth: 100,
   },
-  buttonText: { color: '#fff', fontSize: 16, textAlign: 'center' },
+  buttonText: { color: COLORS.white, fontSize: 16, textAlign: 'center' },
   clearButton: { padding: 8, marginRight: 4 },
 });
 

@@ -5,6 +5,7 @@ import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 
 import { Meal } from '@/store/useMealStore';
+import { COLORS } from '@/theme/colors';
 
 interface Props {
   meals: Meal[];
@@ -42,7 +43,7 @@ const MealList: React.FC<Props> = ({ meals }) => {
 const styles = StyleSheet.create({
   listContent: { padding: 16 },
   mealCard: {
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     borderRadius: 12,
     marginBottom: 16,
     overflow: 'hidden',
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   mealImage: { width: '100%', height: 200 },
   mealTitleContainer: { padding: 12 },
-  mealTitle: { fontSize: 16, fontWeight: 'bold', color: '#424242' },
+  mealTitle: { fontSize: 16, fontWeight: 'bold', color: COLORS.text },
 });
 
 export default React.memo(MealList);

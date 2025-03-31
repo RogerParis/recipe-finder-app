@@ -1,6 +1,8 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { COLORS } from '@/theme/colors';
+
 interface Props {
   mealSuggestion: string;
   isLoading: boolean;
@@ -17,7 +19,7 @@ const AISuggestionCard: React.FC<Props> = ({
   <View style={styles.card}>
     <Text style={styles.title}>AI Suggestion</Text>
     {isLoading ? (
-      <ActivityIndicator size="large" style={styles.loader} color="#1a237e" />
+      <ActivityIndicator size="large" style={styles.loader} color={COLORS.primary} />
     ) : (
       <Text style={styles.suggestion}>{mealSuggestion}</Text>
     )}
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     margin: 16,
     padding: 16,
     borderRadius: 12,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     elevation: 3,
   },
   title: {
@@ -47,26 +49,26 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 12,
-    color: '#1a237e',
+    color: COLORS.primary,
   },
   suggestion: {
     fontSize: 16,
     textAlign: 'center',
     marginBottom: 16,
-    color: '#424242',
+    color: COLORS.text,
     lineHeight: 24,
   },
   loader: { marginVertical: 16 },
   button: {
-    backgroundColor: '#1a237e',
+    backgroundColor: COLORS.primary,
     padding: 12,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 8,
   },
   flexButton: { flex: 1 },
-  tryButton: { backgroundColor: '#2e7d32' },
-  buttonText: { color: '#fff', fontSize: 16, fontWeight: '600' },
+  tryButton: { backgroundColor: COLORS.secondary },
+  buttonText: { color: COLORS.white, fontSize: 16, fontWeight: '600' },
   buttonContainer: { flexDirection: 'row', gap: 8, marginTop: 8 },
 });
 
