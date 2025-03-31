@@ -1,6 +1,13 @@
-import { Stack } from 'expo-router';
+// app/_layout.tsx
+import { useContext } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 
+import { Redirect, Slot, useSegments } from 'expo-router';
+
+import '@/services/auth.service'; // 👈 ensures Firebase is ready
 import { apolloClient } from '@/services/apollo.service';
+import { AuthContext, AuthProvider } from '@/store/auth.context';
+import { COLORS } from '@/theme/colors';
 import { ApolloProvider } from '@apollo/client';
 import * as Sentry from '@sentry/react-native';
 
@@ -11,63 +18,38 @@ Sentry.init({
   // spotlight: __DEV__,
 });
 
-export default Sentry.wrap(function RootLayout() {
+const RootLayout = Sentry.wrap(() => {
   return (
     <ApolloProvider client={apolloClient}>
-      <Stack>
-        <Stack.Screen
-          name="index"
-          options={{
-            title: 'Choose a Feature',
-            headerStyle: {
-              backgroundColor: '#1a237e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="meal/index"
-          options={{
-            title: 'Meal of the Day',
-            headerStyle: {
-              backgroundColor: '#1a237e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="meal/[id]"
-          options={{
-            title: 'Meal Details',
-            headerStyle: {
-              backgroundColor: '#1a237e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="countries"
-          options={{
-            title: 'Select a Country',
-            headerStyle: {
-              backgroundColor: '#1a237e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-      </Stack>
+      <AuthProvider>
+        <AppEntry />
+      </AuthProvider>
     </ApolloProvider>
   );
 });
+
+export function AppEntry() {
+  const { user, initializing } = useContext(AuthContext);
+  const [segment] = useSegments();
+  const isInAuthGroup = segment === '(auth)';
+
+  if (initializing) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+      </View>
+    );
+  }
+
+  if (!user && !isInAuthGroup) {
+    return <Redirect href="/(auth)" />;
+  }
+
+  if (user && isInAuthGroup) {
+    return <Redirect href="/(dashboard)" />;
+  }
+
+  return <Slot />;
+}
+
+export default RootLayout;
