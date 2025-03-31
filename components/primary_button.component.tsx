@@ -6,12 +6,14 @@ import { COLORS } from '@/theme/colors';
 interface PrimaryButtonProps {
   title: string;
   onPress: () => void;
+  style?: object;
+  textStyle?: object;
 }
 
-export default function PrimaryButton({ title, onPress }: PrimaryButtonProps) {
+export default function PrimaryButton({ title, onPress, style, textStyle }: PrimaryButtonProps) {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.label}>{title}</Text>
+    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+      <Text style={[styles.label, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 }

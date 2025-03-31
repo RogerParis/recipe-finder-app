@@ -1,4 +1,8 @@
+import { Pressable } from 'react-native';
+
 import { Stack } from 'expo-router';
+import { router } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 import { COLORS } from '@/theme/colors';
 
@@ -8,8 +12,16 @@ export default function RootLayout() {
       screenOptions={{
         headerShown: true,
         headerStyle: { backgroundColor: COLORS.primary },
-        headerTintColor: '#fff',
+        headerTintColor: COLORS.white,
         headerTitleAlign: 'center',
+        headerRight: () => (
+          <Pressable
+            onPress={() => router.push('/(dashboard)/profile')}
+            style={{ marginRight: 15 }}
+            hitSlop={10}>
+            <Ionicons name="person-outline" size={22} color={COLORS.white} />
+          </Pressable>
+        ),
       }}>
       <Stack.Screen
         name="index"
@@ -35,6 +47,7 @@ export default function RootLayout() {
           title: 'Select a Country',
         }}
       />
+      <Stack.Screen name="profile" options={{ title: 'Your Profile', headerRight: () => null }} />
     </Stack>
   );
 }
