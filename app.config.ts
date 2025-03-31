@@ -55,6 +55,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     output: 'static',
     favicon: './assets/images/favicon.png',
   },
+  androidStatusBar: {
+    backgroundColor: '#0A84FF', // 🍽 RecipeFinder Blue
+    barStyle: 'light-content', // white text/icons
+  },
   plugins: [
     'expo-router',
     [
