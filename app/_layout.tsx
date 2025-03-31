@@ -1,8 +1,8 @@
 // app/_layout.tsx
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-import { Redirect, Slot, useSegments } from 'expo-router';
+import { Slot, useRouter, useSegments } from 'expo-router';
 
 import '@/services/auth.service'; // 👈 ensures Firebase is ready
 import { apolloClient } from '@/services/apollo.service';
@@ -31,7 +31,19 @@ const RootLayout = Sentry.wrap(() => {
 export function AppEntry() {
   const { user, initializing } = useContext(AuthContext);
   const [segment] = useSegments();
-  const isInAuthGroup = segment === '(auth)';
+  const router = useRouter();
+
+  const isInAuthGroup = segment?.startsWith('(auth)');
+
+  useEffect(() => {
+    if (!initializing) {
+      if (!user && !isInAuthGroup) {
+        router.replace('/(auth)');
+      } else if (user && isInAuthGroup) {
+        router.replace('/(dashboard)');
+      }
+    }
+  }, [user, initializing, isInAuthGroup]);
 
   if (initializing) {
     return (
@@ -39,14 +51,6 @@ export function AppEntry() {
         <ActivityIndicator size="large" color={COLORS.primary} />
       </View>
     );
-  }
-
-  if (!user && !isInAuthGroup) {
-    return <Redirect href="/(auth)" />;
-  }
-
-  if (user && isInAuthGroup) {
-    return <Redirect href="/(dashboard)" />;
   }
 
   return <Slot />;
