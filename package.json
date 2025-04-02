@@ -25,6 +25,7 @@
     "@expo/vector-icons": "^14.0.2",
     "@react-native-firebase/app": "^21.12.2",
     "@react-native-firebase/auth": "^21.12.2",
+    "@react-native-google-signin/google-signin": "^13.2.0",
     "@sentry/react-native": "^6.9.1",
     "axios": "^1.8.2",
     "expo": "~52.0.37",

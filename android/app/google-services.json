@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "444031261308-jn85gf0kqt15qbvfr317cccuf83npl3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rogerparis.RecipeFinder",
+            "certificate_hash": "a0b05788c935feebbda4257561c6527d7dff627a"
+          }
+        },
+        {
           "client_id": "444031261308-t5ob3730b9imnlo8muuokoihlgu6v437.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -8,7 +8,9 @@ import PrimaryButton from '@/components/primary_button.component';
 
 import { login } from '../../services/auth.service';
 
+import { signInWithGoogle } from '@/services/google_native_auth.service';
 import { AuthContext } from '@/store/auth.context';
+import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
@@ -24,6 +26,19 @@ export default function SignIn() {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await signInWithGoogle();
+      setUser(res.user);
+    } catch (err) {
+      console.error('Google login error:', err);
+      Alert.alert(
+        'Google Login Failed',
+        err instanceof Error ? err.message : 'An unknown error occurred',
+      );
+    }
+  };
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', padding: 20 }}>
       <Text style={{ fontSize: 24, marginBottom: 20 }}>Sign In</Text>
@@ -35,6 +50,12 @@ export default function SignIn() {
         secureTextEntry
       />
       <PrimaryButton title="Login" onPress={handleLogin} />
+      <GoogleSigninButton
+        style={{ width: 192, height: 48, marginTop: 20, alignSelf: 'center' }}
+        size={GoogleSigninButton.Size.Standard}
+        color={GoogleSigninButton.Color.Dark}
+        onPress={handleGoogleLogin}
+      />
       <TouchableOpacity onPress={() => router.push('/(auth)/forgot_password')}>
         <Text style={{ marginTop: 16, color: '#0A84FF' }}>Forgot password?</Text>
       </TouchableOpacity>

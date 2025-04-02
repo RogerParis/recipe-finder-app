@@ -24,10 +24,9 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="myapp"/>
+        <data android:scheme="recipefinder"/>
         <data android:scheme="com.rogerparis.RecipeFinder"/>
         <data android:scheme="exp+recipefinder"/>
-        <data android:scheme="recipefinder"/>
       </intent-filter>
     </activity>
   </application>

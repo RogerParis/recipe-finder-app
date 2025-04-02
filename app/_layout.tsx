@@ -9,6 +9,7 @@ import { apolloClient } from '@/services/apollo.service';
 import { AuthContext, AuthProvider } from '@/store/auth.context';
 import { COLORS } from '@/theme/colors';
 import { ApolloProvider } from '@apollo/client';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
@@ -16,6 +17,12 @@ Sentry.init({
 
   // uncomment the line below to enable Spotlight (https://spotlightjs.com)
   // spotlight: __DEV__,
+});
+
+GoogleSignin.configure({
+  webClientId: '444031261308-t5ob3730b9imnlo8muuokoihlgu6v437.apps.googleusercontent.com',
+  offlineAccess: false,
+  scopes: ['profile', 'email'],
 });
 
 const RootLayout = Sentry.wrap(() => {
