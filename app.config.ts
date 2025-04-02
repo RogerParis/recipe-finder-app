@@ -31,6 +31,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: getAppName(),
   slug: 'RecipeFinder',
+  owner: 'rogerparis',
   version: '1.0.0',
   orientation: 'portrait',
   icon: './assets/images/icon.png',
@@ -100,5 +101,4 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: '17fba524-5c63-4380-bba3-8137a64a1f7b',
     },
   },
-  owner: 'rogerparis',
 });
