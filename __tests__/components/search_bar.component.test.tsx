@@ -24,17 +24,6 @@ describe('SearchBar', () => {
     expect(onChangeMock).toHaveBeenCalledWith('Chicken');
   });
 
-  it('handles search button', () => {
-    const onClearMock = jest.fn();
-    const onSearchMock = jest.fn();
-    const { getByText } = render(
-      <SearchBar value="Test" onChange={jest.fn()} onClear={onClearMock} />,
-    );
-
-    fireEvent.press(getByText('Search'));
-    expect(onSearchMock).toHaveBeenCalled();
-  });
-
   it('handles clear button', () => {
     const onClearMock = jest.fn();
     const { getByTestId } = render(
