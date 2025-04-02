@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Animated, Keyboard, StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 
 import AISuggestionCard from '@/components/ai_suggestion_card.component';
 import MealList from '@/components/meal_list.component';
@@ -7,6 +7,7 @@ import SearchBar from '@/components/search_bar.component';
 
 import { useAISuggestions } from '@/store/useAISuggestions';
 import { useMealStore } from '@/store/useMealStore';
+import debounce from 'lodash/debounce';
 
 const MealScreen = () => {
   const [queryMealSuggestion, setQueryMealSuggestion] = useState('');
@@ -54,10 +55,20 @@ const MealScreen = () => {
     clearMeals();
   }, [clearMeals]);
 
-  const handleSearch = useCallback(() => {
-    Keyboard.dismiss();
-    fetchMeals(queryMealSuggestion);
-  }, [queryMealSuggestion, fetchMeals]);
+  const triggerSearch = useCallback(
+    debounce((searchQuery: string) => {
+      fetchMeals(searchQuery);
+    }, 500),
+    [fetchMeals],
+  );
+
+  const handleSearch = useCallback(
+    (searchQuery: string) => {
+      setQueryMealSuggestion(searchQuery);
+      triggerSearch(searchQuery);
+    },
+    [queryMealSuggestion, fetchMeals],
+  );
 
   return (
     <View style={styles.container}>
@@ -88,12 +99,7 @@ const MealScreen = () => {
         </Text>
       </Animated.View>
 
-      <SearchBar
-        value={queryMealSuggestion}
-        onChange={setQueryMealSuggestion}
-        onClear={handleClearSearch}
-        onSearch={handleSearch}
-      />
+      <SearchBar value={queryMealSuggestion} onChange={handleSearch} onClear={handleClearSearch} />
 
       <MealList meals={meals} />
     </View>

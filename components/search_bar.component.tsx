@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,10 +9,9 @@ interface Props {
   value: string;
   onChange: (val: string) => void;
   onClear: () => void;
-  onSearch: () => void;
 }
 
-const SearchBar: React.FC<Props> = ({ value, onChange, onClear, onSearch }) => (
+const SearchBar: React.FC<Props> = ({ value, onChange, onClear }) => (
   <View style={styles.searchSection}>
     <View style={styles.searchInputContainer}>
       <TextInput
@@ -28,9 +27,6 @@ const SearchBar: React.FC<Props> = ({ value, onChange, onClear, onSearch }) => (
         </TouchableOpacity>
       )}
     </View>
-    <TouchableOpacity style={styles.searchButton} onPress={onSearch}>
-      <Text style={styles.buttonText}>Search</Text>
-    </TouchableOpacity>
   </View>
 );
 
@@ -46,14 +42,6 @@ const styles = StyleSheet.create({
     borderColor: COLORS.border,
   },
   searchInput: { flex: 1, padding: 12, fontSize: 16 },
-  searchButton: {
-    backgroundColor: COLORS.primary,
-    padding: 12,
-    borderRadius: 8,
-    justifyContent: 'center',
-    minWidth: 100,
-  },
-  buttonText: { color: COLORS.white, fontSize: 16, textAlign: 'center' },
   clearButton: { padding: 8, marginRight: 4 },
 });
 
