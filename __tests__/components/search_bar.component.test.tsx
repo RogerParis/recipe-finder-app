@@ -16,7 +16,7 @@ describe('SearchBar', () => {
   it('updates input text', () => {
     const onChangeMock = jest.fn();
     const { getByPlaceholderText } = render(
-      <SearchBar value="" onChange={onChangeMock} onClear={jest.fn()} onSearch={jest.fn()} />,
+      <SearchBar value="" onChange={onChangeMock} onClear={jest.fn()} />,
     );
 
     const input = getByPlaceholderText('Search for a meal...');
@@ -28,7 +28,7 @@ describe('SearchBar', () => {
     const onClearMock = jest.fn();
     const onSearchMock = jest.fn();
     const { getByText } = render(
-      <SearchBar value="Test" onChange={jest.fn()} onClear={onClearMock} onSearch={onSearchMock} />,
+      <SearchBar value="Test" onChange={jest.fn()} onClear={onClearMock} />,
     );
 
     fireEvent.press(getByText('Search'));
@@ -37,9 +37,8 @@ describe('SearchBar', () => {
 
   it('handles clear button', () => {
     const onClearMock = jest.fn();
-    const onSearchMock = jest.fn();
     const { getByTestId } = render(
-      <SearchBar value="Test" onChange={jest.fn()} onClear={onClearMock} onSearch={onSearchMock} />,
+      <SearchBar value="Test" onChange={jest.fn()} onClear={onClearMock} />,
     );
 
     fireEvent.press(getByTestId('clear-search'));
