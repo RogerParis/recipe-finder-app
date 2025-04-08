@@ -1,14 +1,13 @@
-import { useContext } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 
 import PrimaryButton from '@/components/primary_button.component';
 
 import { logout } from '@/services/auth.service';
-import { AuthContext } from '@/store/auth.context';
+import { useAuth } from '@/store/auth.context';
 import { COLORS } from '@/theme/colors';
 
 export default function ProfileScreen() {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser } = useAuth();
 
   const confirmLogout = () => {
     Alert.alert(

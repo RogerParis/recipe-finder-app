@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 import { onUserAuthStateChanged } from '../services/auth.service';
 
@@ -14,7 +14,7 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-export const AuthContext = createContext<AuthContextProps>({
+const AuthContext = createContext<AuthContextProps>({
   user: null,
   initializing: true,
   setUser: () => null,
@@ -39,3 +39,5 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     <AuthContext.Provider value={{ user, setUser, initializing }}>{children}</AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);

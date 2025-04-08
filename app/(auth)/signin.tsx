@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 
 import { router } from 'expo-router';
@@ -8,12 +8,12 @@ import PrimaryButton from '@/components/primary_button.component';
 
 import { login } from '../../services/auth.service';
 
-import { AuthContext } from '@/store/auth.context';
+import { useAuth } from '@/store/auth.context';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setUser } = useContext(AuthContext);
+  const { setUser } = useAuth();
 
   const handleLogin = async () => {
     try {

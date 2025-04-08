@@ -1,12 +1,12 @@
 // app/_layout.tsx
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
 import { Slot, useRouter, useSegments } from 'expo-router';
 
 import '@/services/auth.service'; // 👈 ensures Firebase is ready
 import { apolloClient } from '@/services/apollo.service';
-import { AuthContext, AuthProvider } from '@/store/auth.context';
+import { AuthProvider, useAuth } from '@/store/auth.context';
 import { COLORS } from '@/theme/colors';
 import { ApolloProvider } from '@apollo/client';
 import * as Sentry from '@sentry/react-native';
@@ -29,7 +29,7 @@ const RootLayout = Sentry.wrap(() => {
 });
 
 export function AppEntry() {
-  const { user, initializing } = useContext(AuthContext);
+  const { user, initializing } = useAuth();
   const [segment] = useSegments();
   const router = useRouter();
 

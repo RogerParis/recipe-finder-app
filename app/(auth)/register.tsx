@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 
 import CustomInput from '@/components/custom_input';
@@ -6,12 +6,12 @@ import PrimaryButton from '@/components/primary_button.component';
 
 import { register } from '../../services/auth.service';
 
-import { AuthContext } from '@/store/auth.context';
+import { useAuth } from '@/store/auth.context';
 
 export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setUser } = useContext(AuthContext);
+  const { setUser } = useAuth();
 
   const handleRegister = async () => {
     try {
