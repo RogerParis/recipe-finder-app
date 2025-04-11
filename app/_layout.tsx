@@ -1,6 +1,7 @@
 // app/_layout.tsx
 import { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { Slot, useRouter, useSegments } from 'expo-router';
 
@@ -22,7 +23,9 @@ const RootLayout = Sentry.wrap(() => {
   return (
     <ApolloProvider client={apolloClient}>
       <AuthProvider>
-        <AppEntry />
+        <GestureHandlerRootView>
+          <AppEntry />
+        </GestureHandlerRootView>
       </AuthProvider>
     </ApolloProvider>
   );

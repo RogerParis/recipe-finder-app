@@ -60,7 +60,12 @@ export default function RootLayout() {
         name="meal/[id]"
         options={({ route }) => ({
           title: 'Meal Details',
-          headerRight: () => <FavoriteToggleButton mealId={route.params.id} />,
+          headerRight: () => (
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <FavoriteToggleButton mealId={route.params.id} />
+              <ProfileButton />
+            </View>
+          ),
         })}
       />
       <Stack.Screen
