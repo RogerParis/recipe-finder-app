@@ -85,7 +85,14 @@ describe('useMealStore', () => {
     const { result } = renderHook(() => useMealStore());
 
     act(() => {
-      result.current.meals = [{ idMeal: '1', strMeal: 'Test', strMealThumb: '' }];
+      result.current.meals = [
+        {
+          idMeal: '1',
+          strMeal: 'Test',
+          strMealThumb: '',
+          strInstructions: 'Test instructions',
+        },
+      ];
     });
 
     act(() => {
