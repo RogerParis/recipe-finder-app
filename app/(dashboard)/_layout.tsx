@@ -1,10 +1,19 @@
-import { Pressable } from 'react-native';
+import { View } from 'react-native';
 
 import { Stack } from 'expo-router';
 import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+
+import { HeaderButton } from '@/components/header_button.component';
 
 import { COLORS } from '@/theme/colors';
+
+const ProfileButton = () => (
+  <HeaderButton icon="person-outline" onPress={() => router.push('/(dashboard)/profile')} />
+);
+
+const FavoritesButton = () => (
+  <HeaderButton icon="heart" onPress={() => router.push('/meal/favorites')} color="red" />
+);
 
 export default function RootLayout() {
   return (
@@ -14,14 +23,7 @@ export default function RootLayout() {
         headerStyle: { backgroundColor: COLORS.primary },
         headerTintColor: COLORS.white,
         headerTitleAlign: 'center',
-        headerRight: () => (
-          <Pressable
-            onPress={() => router.push('/(dashboard)/profile')}
-            style={{ marginRight: 15 }}
-            hitSlop={10}>
-            <Ionicons name="person-outline" size={22} color={COLORS.white} />
-          </Pressable>
-        ),
+        headerRight: () => <ProfileButton />,
       }}>
       <Stack.Screen
         name="index"
@@ -33,6 +35,12 @@ export default function RootLayout() {
         name="meal/index"
         options={{
           title: 'Meal of the Day',
+          headerRight: () => (
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <FavoritesButton />
+              <ProfileButton />
+            </View>
+          ),
         }}
       />
       <Stack.Screen
@@ -45,6 +53,12 @@ export default function RootLayout() {
         name="countries"
         options={{
           title: 'Select a Country',
+        }}
+      />
+      <Stack.Screen
+        name="meal/favorites"
+        options={{
+          title: 'Your Favorites',
         }}
       />
       <Stack.Screen name="profile" options={{ title: 'Your Profile', headerRight: () => null }} />
