@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { View } from 'react-native';
 
 import { Stack } from 'expo-router';
@@ -18,7 +19,7 @@ const FavoritesButton = () => (
 
 const FavoriteToggleButton = ({ mealId }: { mealId: string }) => {
   const { isMealFavorite, toggleFavoriteMeal } = useMealStore();
-  const isFavorite = isMealFavorite(mealId);
+  const isFavorite = useMemo(() => isMealFavorite(mealId), [mealId, isMealFavorite]);
 
   return (
     <HeaderButton

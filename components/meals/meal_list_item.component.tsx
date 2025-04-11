@@ -17,24 +17,26 @@ interface Props {
 const MealListItem: React.FC<Props> = ({ meal }) => {
   const router = useRouter();
   const { toggleFavoriteMeal, isMealFavorite } = useMealStore();
-  const isFavorite = isMealFavorite(meal.idMeal);
 
   const renderRightActions = React.useCallback(
-    (id: string) => (
-      <Pressable
-        style={[
-          styles.favoriteActionButton,
-          { backgroundColor: isFavorite ? COLORS.red : COLORS.white },
-        ]}
-        onPress={() => toggleFavoriteMeal(id)}>
-        <Ionicons
-          name={isFavorite ? 'trash-bin' : 'heart-outline'}
-          size={24}
-          color={isFavorite ? COLORS.white : COLORS.red}
-        />
-      </Pressable>
-    ),
-    [toggleFavoriteMeal, isFavorite],
+    (id: string) => {
+      const isFavorite = isMealFavorite(id);
+      return (
+        <Pressable
+          style={[
+            styles.favoriteActionButton,
+            { backgroundColor: isFavorite ? COLORS.red : COLORS.white },
+          ]}
+          onPress={() => toggleFavoriteMeal(id)}>
+          <Ionicons
+            name={isFavorite ? 'trash-bin' : 'heart-outline'}
+            size={24}
+            color={isFavorite ? COLORS.white : COLORS.red}
+          />
+        </Pressable>
+      );
+    },
+    [toggleFavoriteMeal, isMealFavorite],
   );
 
   return (
