@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
@@ -30,11 +30,11 @@ const MealDetailScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Image source={{ uri: selectedMeal.strMealThumb }} style={styles.image} contentFit="cover" />
       <Text style={styles.title}>{selectedMeal.strMeal}</Text>
       <Text style={styles.instructions}>{selectedMeal.strInstructions}</Text>
-    </View>
+    </ScrollView>
   );
 };
 
