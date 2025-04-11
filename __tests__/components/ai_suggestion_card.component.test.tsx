@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AISuggestionCard from '@/components/ai_suggestion_card.component';
+import AISuggestionCard from '@/components/meals/ai_suggestion_card.component';
 
 import { fireEvent, render } from '@testing-library/react-native';
 

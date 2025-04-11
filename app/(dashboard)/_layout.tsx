@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { router } from 'expo-router';
 
-import { HeaderButton } from '@/components/header_button.component';
+import { HeaderButton } from '@/components/common/header_button.component';
 
 import { useMealStore } from '@/store/meals/useMealStore';
 import { COLORS } from '@/theme/colors';
@@ -60,12 +60,7 @@ export default function RootLayout() {
         name="meal/[id]"
         options={({ route }) => ({
           title: 'Meal Details',
-          headerRight: () => (
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <FavoriteToggleButton mealId={route.params.id} />
-              <ProfileButton />
-            </View>
-          ),
+          headerRight: () => <FavoriteToggleButton mealId={route.params.id} />,
         })}
       />
       <Stack.Screen

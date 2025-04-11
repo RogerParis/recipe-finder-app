@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MealList from '@/components/meal_list.component';
+import MealList from '@/components/meals/meal_list.component';
 
 import { render } from '@testing-library/react-native';
 

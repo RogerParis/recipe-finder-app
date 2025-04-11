@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
-import AISuggestionCard from '@/components/ai_suggestion_card.component';
-import MealList from '@/components/meal_list.component';
-import SearchBar from '@/components/search_bar.component';
+import AISuggestionCard from '@/components/meals/ai_suggestion_card.component';
+import MealList from '@/components/meals/meal_list.component';
+import SearchBar from '@/components/meals/search_bar.component';
 
 import { useMealStore } from '@/store/meals/useMealStore';
 import { useAISuggestions } from '@/store/useAISuggestions';

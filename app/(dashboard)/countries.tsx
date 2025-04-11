@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-import CountrySelectorHeader from '@/components/country_selector_header.component';
+import CountrySelectorHeader from '@/components/countries/country_selector_header.component';
 
 import { COUNTRIES_QUERY } from '@/services/apollo.service';
 import { Country, useCountryStore } from '@/store/useCountryStore';

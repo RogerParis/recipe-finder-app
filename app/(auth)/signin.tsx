@@ -3,8 +3,8 @@ import { Alert, Text, TouchableOpacity, View } from 'react-native';
 
 import { router } from 'expo-router';
 
-import CustomInput from '@/components/custom_input';
-import PrimaryButton from '@/components/primary_button.component';
+import CustomInput from '@/components/common/custom_input';
+import PrimaryButton from '@/components/common/primary_button.component';
 
 import { login } from '../../services/auth.service';
 

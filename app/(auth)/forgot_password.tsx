@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 
-import CustomInput from '@/components/custom_input';
-import PrimaryButton from '@/components/primary_button.component';
+import CustomInput from '@/components/common/custom_input';
+import PrimaryButton from '@/components/common/primary_button.component';
 
 import { resetPassword } from '../../services/auth.service';
 

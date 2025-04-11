@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CountrySelectorHeader from '@/components/country_selector_header.component';
+import CountrySelectorHeader from '@/components/countries/country_selector_header.component';
 
 import { useCountryStore } from '@/store/useCountryStore';
 import { fireEvent, render } from '@testing-library/react-native';

@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 
 import { router } from 'expo-router';
 
-import PrimaryButton from '@/components/primary_button.component';
+import PrimaryButton from '@/components/common/primary_button.component';
 
 export default function Landing() {
   return (

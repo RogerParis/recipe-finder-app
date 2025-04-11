@@ -1,6 +1,6 @@
 import { Alert, StyleSheet, Text, View } from 'react-native';
 
-import PrimaryButton from '@/components/primary_button.component';
+import PrimaryButton from '@/components/common/primary_button.component';
 
 import { logout } from '@/services/auth.service';
 import { useAuth } from '@/store/auth.context';

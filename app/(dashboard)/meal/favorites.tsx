@@ -1,36 +1,21 @@
 import React from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
-import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import { FlatList, StyleSheet, View } from 'react-native';
 
-import { Ionicons } from '@expo/vector-icons';
+import MealListItem from '@/components/meals/meal_list_item.component';
 
 import { useMealStore } from '@/store/meals/useMealStore';
 import { COLORS } from '@/theme/colors';
 
 const Favorites = () => {
-  const { getFavoriteMeals, toggleFavoriteMeal } = useMealStore();
+  const { getFavoriteMeals } = useMealStore();
   const favorites = getFavoriteMeals();
-
-  const renderRightActions = (id: string) => (
-    <Pressable style={styles.unfavoriteButton} onPress={() => toggleFavoriteMeal(id)}>
-      <Ionicons name="trash-bin" size={24} color={COLORS.white} />
-    </Pressable>
-  );
-
-  const renderItem = ({ item }: { item: { idMeal: string; strMeal: string } }) => (
-    <Swipeable renderRightActions={() => renderRightActions(item.idMeal)}>
-      <View style={styles.itemContainer}>
-        <Text style={styles.itemText}>{item.strMeal}</Text>
-      </View>
-    </Swipeable>
-  );
 
   return (
     <View style={styles.container}>
       <FlatList
         data={favorites}
         keyExtractor={(item) => item.idMeal}
-        renderItem={renderItem}
+        renderItem={({ item }) => <MealListItem meal={item} />}
         contentContainerStyle={styles.listContainer}
       />
     </View>
