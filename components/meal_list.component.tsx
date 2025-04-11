@@ -4,7 +4,7 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 
-import { Meal } from '@/store/meals/useMealStore';
+import { Meal } from '@/store/meals/types';
 import { COLORS } from '@/theme/colors';
 
 interface Props {
