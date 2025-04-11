@@ -5,8 +5,8 @@ import AISuggestionCard from '@/components/ai_suggestion_card.component';
 import MealList from '@/components/meal_list.component';
 import SearchBar from '@/components/search_bar.component';
 
+import { useMealStore } from '@/store/meals/useMealStore';
 import { useAISuggestions } from '@/store/useAISuggestions';
-import { useMealStore } from '@/store/useMealStore';
 import debounce from 'lodash/debounce';
 
 const MealScreen = () => {

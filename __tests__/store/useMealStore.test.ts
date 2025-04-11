@@ -1,4 +1,4 @@
-import { useMealStore } from '@/store/useMealStore'; // adjust path if needed
+import { useMealStore } from '@/store/meals/useMealStore'; // adjust path if needed
 import { act, renderHook } from '@testing-library/react-hooks';
 import axios from 'axios';
 

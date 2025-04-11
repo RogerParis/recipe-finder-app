@@ -4,7 +4,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 
-import { useMealStore } from '@/store/useMealStore';
+import { useMealStore } from '@/store/meals/useMealStore';
 
 const MealDetailScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();

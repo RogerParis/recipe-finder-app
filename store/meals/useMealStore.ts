@@ -1,33 +1,13 @@
 import { MMKV } from 'react-native-mmkv';
 
-import { env } from '@/config/env';
-import axios from 'axios';
+import { fetchMealByIdFromApi, fetchMealsFromApi } from './mealApi';
+import { MealState } from './types';
+
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
 const storage = new MMKV();
-
-export interface Meal {
-  idMeal: string;
-  strMeal: string;
-  strInstructions: string;
-  strMealThumb: string;
-}
-
-export interface MealState {
-  meals: Meal[];
-  isLoading: boolean;
-  error: string | null;
-  favoriteMealIds: string[];
-  selectedMeal: Meal | null;
-  fetchMealById: (id: string) => Promise<Meal | null>;
-  fetchMeals: (query: string) => Promise<void>;
-  clearMeals: () => void;
-  toggleFavoriteMeal: (mealId: string) => void;
-  isMealFavorite: (mealId: string) => boolean;
-  getFavoriteMeals: () => Meal[];
-}
 
 export const useMealStore = create<MealState>()(
   persist(
@@ -45,9 +25,9 @@ export const useMealStore = create<MealState>()(
         });
 
         try {
-          const response = await axios.get(`${env.API_URL}/search.php?s=${query}`);
+          const meals = await fetchMealsFromApi(query);
           set((state) => {
-            state.meals = response.data.meals || [];
+            state.meals = meals;
           });
         } catch (error) {
           console.error('Error fetching meals:', error);
@@ -63,8 +43,7 @@ export const useMealStore = create<MealState>()(
 
       fetchMealById: async (id) => {
         try {
-          const response = await axios.get(`${env.API_URL}/lookup.php?i=${id}`);
-          const meal = response.data.meals?.[0] || null;
+          const meal = await fetchMealByIdFromApi(id);
           set((state) => {
             state.selectedMeal = meal;
           });
