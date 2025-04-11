@@ -11,6 +11,7 @@ const storage = new MMKV();
 export interface Meal {
   idMeal: string;
   strMeal: string;
+  strInstructions: string;
   strMealThumb: string;
 }
 
@@ -19,6 +20,8 @@ export interface MealState {
   isLoading: boolean;
   error: string | null;
   favoriteMealIds: string[];
+  selectedMeal: Meal | null;
+  fetchMealById: (id: string) => Promise<Meal | null>;
   fetchMeals: (query: string) => Promise<void>;
   clearMeals: () => void;
   toggleFavoriteMeal: (mealId: string) => void;
@@ -33,6 +36,7 @@ export const useMealStore = create<MealState>()(
       isLoading: false,
       error: null,
       favoriteMealIds: [],
+      selectedMeal: null,
 
       fetchMeals: async (query) => {
         set((state) => {
@@ -54,6 +58,20 @@ export const useMealStore = create<MealState>()(
           set((state) => {
             state.isLoading = false;
           });
+        }
+      },
+
+      fetchMealById: async (id) => {
+        try {
+          const response = await axios.get(`${env.API_URL}/lookup.php?i=${id}`);
+          const meal = response.data.meals?.[0] || null;
+          set((state) => {
+            state.selectedMeal = meal;
+          });
+          return meal;
+        } catch (error) {
+          console.error('Error fetching meal by ID:', error);
+          return null;
         }
       },
 
