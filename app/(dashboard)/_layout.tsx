@@ -22,7 +22,8 @@ const FavoriteToggleButton = ({ mealId }: { mealId: string }) => {
 
   return (
     <HeaderButton
-      icon={isFavorite ? 'heart' : 'heart-outline'}
+      icon={'heart'}
+      color={isFavorite ? COLORS.red : COLORS.white}
       onPress={() => toggleFavoriteMeal(mealId)}
     />
   );
@@ -58,10 +59,18 @@ export default function RootLayout() {
       />
       <Stack.Screen
         name="meal/[id]"
-        options={({ route }) => ({
-          title: 'Meal Details',
-          headerRight: () => <FavoriteToggleButton mealId={route.params.id} />,
-        })}
+        options={({ route }: { route: { params?: { id?: string } } }) => {
+          const mealId = route.params?.id || '';
+          return {
+            title: 'Meal Details',
+            headerRight: () => (
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                {mealId ? <FavoriteToggleButton mealId={mealId} /> : null}
+                <ProfileButton />
+              </View>
+            ),
+          };
+        }}
       />
       <Stack.Screen
         name="countries"
