@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
-import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import { useMealStore } from '@/store/meals/useMealStore';
 import { COLORS } from '@/theme/colors';
@@ -13,7 +13,7 @@ const Favorites = () => {
 
   const renderRightActions = (id: string) => (
     <Pressable style={styles.unfavoriteButton} onPress={() => toggleFavoriteMeal(id)}>
-      <MaterialIcons name="delete" size={24} color={COLORS.white} />
+      <Ionicons name="trash-bin" size={24} color={COLORS.white} />
     </Pressable>
   );
 

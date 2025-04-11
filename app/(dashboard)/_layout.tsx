@@ -5,6 +5,7 @@ import { router } from 'expo-router';
 
 import { HeaderButton } from '@/components/header_button.component';
 
+import { useMealStore } from '@/store/meals/useMealStore';
 import { COLORS } from '@/theme/colors';
 
 const ProfileButton = () => (
@@ -14,6 +15,18 @@ const ProfileButton = () => (
 const FavoritesButton = () => (
   <HeaderButton icon="heart" onPress={() => router.push('/meal/favorites')} color="red" />
 );
+
+const FavoriteToggleButton = ({ mealId }: { mealId: string }) => {
+  const { isMealFavorite, toggleFavoriteMeal } = useMealStore();
+  const isFavorite = isMealFavorite(mealId);
+
+  return (
+    <HeaderButton
+      icon={isFavorite ? 'heart' : 'heart-outline'}
+      onPress={() => toggleFavoriteMeal(mealId)}
+    />
+  );
+};
 
 export default function RootLayout() {
   return (
@@ -45,9 +58,10 @@ export default function RootLayout() {
       />
       <Stack.Screen
         name="meal/[id]"
-        options={{
+        options={({ route }) => ({
           title: 'Meal Details',
-        }}
+          headerRight: () => <FavoriteToggleButton mealId={route.params.id} />,
+        })}
       />
       <Stack.Screen
         name="countries"
