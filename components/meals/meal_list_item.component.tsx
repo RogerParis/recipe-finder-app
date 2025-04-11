@@ -65,8 +65,9 @@ const styles = StyleSheet.create({
   favoriteActionButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 60,
-    marginVertical: 8,
+    width: 100,
+    marginBottom: 16,
+    borderRadius: 12,
   },
 });
 
