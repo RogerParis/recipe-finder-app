@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { View } from 'react-native';
 
 import { Stack } from 'expo-router';
@@ -6,6 +5,7 @@ import { router } from 'expo-router';
 
 import { HeaderButton } from '@/components/common/header_button.component';
 
+import { Meal } from '@/store/meals/types';
 import { useMealStore } from '@/store/meals/useMealStore';
 import { COLORS } from '@/theme/colors';
 
@@ -17,15 +17,15 @@ const FavoritesButton = () => (
   <HeaderButton icon="heart" onPress={() => router.push('/meal/favorites')} color="red" />
 );
 
-const FavoriteToggleButton = ({ mealId }: { mealId: string }) => {
+const FavoriteToggleButton = ({ meal }: { meal: Meal }) => {
   const { isMealFavorite, toggleFavoriteMeal } = useMealStore();
-  const isFavorite = useMemo(() => isMealFavorite(mealId), [mealId, isMealFavorite]);
+  const isFavorite = () => isMealFavorite(meal.idMeal);
 
   return (
     <HeaderButton
       icon={'heart'}
-      color={isFavorite ? COLORS.red : COLORS.white}
-      onPress={() => toggleFavoriteMeal(mealId)}
+      color={isFavorite() ? COLORS.red : COLORS.white}
+      onPress={() => toggleFavoriteMeal(meal!)}
     />
   );
 };
@@ -60,13 +60,13 @@ export default function RootLayout() {
       />
       <Stack.Screen
         name="meal/[id]"
-        options={({ route }: { route: { params?: { id?: string } } }) => {
-          const mealId = route.params?.id || '';
+        options={({ route }: { route: { params?: { meal?: string } } }) => {
+          const meal = route.params?.meal ? (JSON.parse(route.params.meal) as Meal) : undefined;
           return {
             title: 'Meal Details',
             headerRight: () => (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                {mealId ? <FavoriteToggleButton mealId={mealId} /> : null}
+                {meal ? <FavoriteToggleButton meal={meal} /> : null}
                 <ProfileButton />
               </View>
             ),

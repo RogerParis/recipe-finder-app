@@ -15,7 +15,7 @@ export const useMealStore = create<MealState>()(
       meals: [],
       isLoading: false,
       error: null,
-      favoriteMealIds: [],
+      favoriteMeals: [],
       selectedMeal: null,
 
       fetchMeals: async (query) => {
@@ -61,24 +61,25 @@ export const useMealStore = create<MealState>()(
         });
       },
 
-      toggleFavoriteMeal: (mealId) => {
+      toggleFavoriteMeal: (meal) => {
         set((state) => {
-          const isFav = state.favoriteMealIds.includes(mealId);
+          const isFav = state.favoriteMeals.some((favMeal) => favMeal.idMeal === meal.idMeal);
           if (isFav) {
-            state.favoriteMealIds = state.favoriteMealIds.filter((id) => id !== mealId);
+            state.favoriteMeals = state.favoriteMeals.filter(
+              (favMeal) => favMeal.idMeal !== meal.idMeal,
+            );
           } else {
-            state.favoriteMealIds.push(mealId);
+            state.favoriteMeals.push(meal);
           }
         });
       },
 
       isMealFavorite: (mealId) => {
-        return get().favoriteMealIds.includes(mealId);
+        return get().favoriteMeals.some((meal) => meal.idMeal === mealId);
       },
 
       getFavoriteMeals: () => {
-        const { meals, favoriteMealIds } = get();
-        return meals.filter((meal) => favoriteMealIds.includes(meal.idMeal));
+        return get().favoriteMeals;
       },
     })),
     {
@@ -89,7 +90,7 @@ export const useMealStore = create<MealState>()(
         removeItem: storage.delete.bind(storage),
       })),
       partialize: (state) => ({
-        favoriteMealIds: state.favoriteMealIds,
+        favoriteMeals: state.favoriteMeals,
       }),
     },
   ),

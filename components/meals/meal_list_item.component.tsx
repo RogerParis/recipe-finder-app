@@ -27,7 +27,7 @@ const MealListItem: React.FC<Props> = ({ meal }) => {
             styles.favoriteActionButton,
             { backgroundColor: isFavorite ? COLORS.red : COLORS.white },
           ]}
-          onPress={() => toggleFavoriteMeal(id)}>
+          onPress={() => toggleFavoriteMeal(meal)}>
           <Ionicons
             name={isFavorite ? 'trash-bin' : 'heart-outline'}
             size={24}
@@ -41,7 +41,17 @@ const MealListItem: React.FC<Props> = ({ meal }) => {
 
   return (
     <Swipeable renderRightActions={() => renderRightActions(meal.idMeal)}>
-      <Pressable style={styles.mealCard} onPress={() => router.push(`/meal/${meal.idMeal}`)}>
+      <Pressable
+        style={styles.mealCard}
+        onPress={() =>
+          router.push({
+            pathname: '/meal/[id]',
+            params: {
+              id: meal.idMeal,
+              meal: JSON.stringify(meal),
+            },
+          })
+        }>
         <Image source={{ uri: meal.strMealThumb }} style={styles.mealImage} contentFit="cover" />
         <View style={styles.mealTitleContainer}>
           <Text style={styles.mealTitle} numberOfLines={2}>
