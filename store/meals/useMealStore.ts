@@ -81,6 +81,12 @@ export const useMealStore = create<MealState>()(
       getFavoriteMeals: () => {
         return get().favoriteMeals;
       },
+
+      setSelectedMeal: (meal) => {
+        set((state) => {
+          state.selectedMeal = meal;
+        });
+      },
     })),
     {
       name: 'meal-storage',

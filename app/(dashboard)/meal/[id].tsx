@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
@@ -8,18 +8,12 @@ import { useMealStore } from '@/store/meals/useMealStore';
 
 const MealDetailScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const [loading, setLoading] = useState(true);
   const { selectedMeal, fetchMealById } = useMealStore();
 
   useEffect(() => {
     if (!id) return;
-    setLoading(true);
-    fetchMealById(id).finally(() => setLoading(false));
+    fetchMealById(id);
   }, [id]);
-
-  if (loading) {
-    return <ActivityIndicator size="large" color="#FF5733" style={{ flex: 1 }} />;
-  }
 
   if (!selectedMeal) {
     return (

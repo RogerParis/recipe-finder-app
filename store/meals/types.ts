@@ -17,4 +17,5 @@ export interface MealState {
   toggleFavoriteMeal: (meal: Meal) => void;
   isMealFavorite: (mealId: string) => boolean;
   getFavoriteMeals: () => Meal[];
+  setSelectedMeal: (meal: Meal) => void;
 }

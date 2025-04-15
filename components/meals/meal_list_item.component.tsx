@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
@@ -16,9 +16,9 @@ interface Props {
 
 const MealListItem: React.FC<Props> = ({ meal }) => {
   const router = useRouter();
-  const { toggleFavoriteMeal, isMealFavorite } = useMealStore();
+  const { toggleFavoriteMeal, isMealFavorite, setSelectedMeal } = useMealStore();
 
-  const renderRightActions = React.useCallback(
+  const renderRightActions = useCallback(
     (id: string) => {
       const isFavorite = isMealFavorite(id);
       return (
@@ -39,19 +39,20 @@ const MealListItem: React.FC<Props> = ({ meal }) => {
     [toggleFavoriteMeal, isMealFavorite],
   );
 
+  const handlePress = useCallback(() => {
+    setSelectedMeal(meal);
+    router.push({
+      pathname: '/meal/[id]',
+      params: {
+        id: meal.idMeal,
+        meal: JSON.stringify(meal),
+      },
+    });
+  }, [meal, router, setSelectedMeal]);
+
   return (
     <Swipeable renderRightActions={() => renderRightActions(meal.idMeal)}>
-      <Pressable
-        style={styles.mealCard}
-        onPress={() =>
-          router.push({
-            pathname: '/meal/[id]',
-            params: {
-              id: meal.idMeal,
-              meal: JSON.stringify(meal),
-            },
-          })
-        }>
+      <Pressable style={styles.mealCard} onPress={handlePress}>
         <Image source={{ uri: meal.strMealThumb }} style={styles.mealImage} contentFit="cover" />
         <View style={styles.mealTitleContainer}>
           <Text style={styles.mealTitle} numberOfLines={2}>
