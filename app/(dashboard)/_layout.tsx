@@ -3,10 +3,10 @@ import { View } from 'react-native';
 import { Stack } from 'expo-router';
 import { router } from 'expo-router';
 
+import FavoriteToggleButton from '@/components/common/favorite_toggle_button.component';
 import { HeaderButton } from '@/components/common/header_button.component';
 
 import { Meal } from '@/store/meals/types';
-import { useMealStore } from '@/store/meals/useMealStore';
 import { COLORS } from '@/theme/colors';
 
 const ProfileButton = () => (
@@ -16,19 +16,6 @@ const ProfileButton = () => (
 const FavoritesButton = () => (
   <HeaderButton icon="heart" onPress={() => router.push('/meal/favorites')} color="red" />
 );
-
-const FavoriteToggleButton = ({ meal }: { meal: Meal }) => {
-  const { isMealFavorite, toggleFavoriteMeal } = useMealStore();
-  const isFavorite = () => isMealFavorite(meal.idMeal);
-
-  return (
-    <HeaderButton
-      icon={'heart'}
-      color={isFavorite() ? COLORS.red : COLORS.white}
-      onPress={() => toggleFavoriteMeal(meal!)}
-    />
-  );
-};
 
 export default function RootLayout() {
   return (
