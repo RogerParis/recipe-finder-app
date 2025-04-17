@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { enableScreens } from 'react-native-screens';
 
 import { Slot, useRouter, useSegments } from 'expo-router';
 
@@ -11,6 +12,8 @@ import { AuthProvider, useAuth } from '@/store/auth.context';
 import { COLORS } from '@/theme/colors';
 import { ApolloProvider } from '@apollo/client';
 import * as Sentry from '@sentry/react-native';
+
+enableScreens();
 
 Sentry.init({
   dsn: 'https://9c5dd1002679e15487595a57c4df6837@o4509005539901442.ingest.de.sentry.io/4509005540360272',
